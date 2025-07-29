@@ -46,9 +46,23 @@ modules:
       - comconfigappconfigapp.zip
       name: comconfigappconfigapp
       target-path: resources/
+    - artifacts:
+      - sampleapp.zip
+      name: sampleapp
+      target-path: resources/
 - name: comconfigappconfigapp
   type: html5
   path: config_app
+  build-parameters:
+    build-result: dist
+    builder: custom
+    commands:
+    - npm install
+    - npm run build:cf
+    supported-platforms: []
+- name: sampleapp
+  type: html5
+  path: sampleapp
   build-parameters:
     build-result: dist
     builder: custom
