@@ -1,0 +1,96 @@
+<mvc:View
+    xmlns="sap.uxap"
+    xmlns:m="sap.m"
+    xmlns:layout="sap.ui.layout"
+    xmlns:mvc="sap.ui.core.mvc"
+    controllerName="com.config.app.configapp.controller.Detail"
+>
+    <ObjectPageLayout
+        id="ObjectPageLayout"
+        showTitleInHeaderContent="true"
+        headerContentPinned="true"
+        alwaysShowContentHeader="false"
+        headerContentPinnable="true"
+        isChildPage="true"
+    >
+        <headerTitle>
+          <ObjectPageDynamicHeaderTitle id="_IDGenObjectPageDynamicHeaderTitle1">
+            <heading>
+              <m:Title id="_IDGenTitle1" text="{detailModel>machine_name}" />
+            </heading>
+
+            <expandedContent>
+              <m:Text id="_IDGenText9" text="{detailModel>Name}"/>
+            </expandedContent>
+
+            <snappedContent>
+              <m:Text id="_IDGenText10" text="{detailModel>Name}"/>
+            </snappedContent>
+
+            <snappedTitleOnMobile>
+              <m:Title id="_IDGenTitle2" text="{detailModel>Name}"/>
+            </snappedTitleOnMobile>
+
+            <actions>
+              
+              <m:OverflowToolbarButton id="_IDGenOverflowToolbarButton" icon="sap-icon://decline" type="Transparent" press=".handleClose" text="Close" tooltip="Close page"/>
+            </actions>
+          </ObjectPageDynamicHeaderTitle>
+        </headerTitle>
+
+        <headerContent>
+          <m:FlexBox id="_IDGenFlexBox" wrap="Wrap" fitContainer="true">
+            <layout:VerticalLayout id="_IDGenVerticalLayout" class="sapUiSmallMarginEnd">
+              <m:ObjectStatus id="_IDGenObjectStatus1" title="Created By" text="{detailModel>createdBy}"/>
+              <m:ObjectStatus id="_IDGenObjectStatus2" title="Created On" text="{ path: 'detailModel>createdAt',
+                                                         type: 'sap.ui.model.type.Date',
+                                                         formatOptions: { pattern: 'MM-dd-yyyy' }
+                                                        }"/>
+            </layout:VerticalLayout>
+
+            <layout:HorizontalLayout id="_IDGenHorizontalLayout" class="sapUiSmallMarginBeginEnd">
+              <m:ObjectStatus id="_IDGenObjectStatus3" title="Status" text="{detailModel>Status}" state="{= ${detailModel>/Status} === 'Active' ? 'Success' : 'Error' }"/>
+            </layout:HorizontalLayout>
+          </m:FlexBox>
+        </headerContent>
+
+        <sections>
+            <ObjectPageSection
+                id="sectionMails"
+                title="Mails"
+            >
+                <ObjectPageSubSection
+                    id="subSectionMails"
+                    title="Mail Details"
+                >
+                    <m:VBox id="_IDGenVBox">
+                        <m:OverflowToolbar id="_IDGenOverflowToolbar1">
+                        <m:ToolbarSpacer id="_IDGenToolbarSpacer1" />
+                            <m:Button id="btnAddRow" text="Add Row" icon="sap-icon://add" type="Emphasized" press=".onAddRow" />
+                            <m:Button id="btnDelete" icon="sap-icon://delete" press=".onDelete" enabled="false" />
+                        </m:OverflowToolbar>
+                          <m:Table
+                            id="mailTable"
+                            inset="false"
+                            items="{ path:'mailModel>/rows',factory:'.buildTable'}"
+                            mode="MultiSelect"
+                             selectionChange=".onSelectionChange"
+                        >
+                            <m:columns>
+                                <m:Column id="_IDGenColumn5">
+                                    <m:Text id="_IDGenText11" text="Mail ID" />
+                                </m:Column>
+                                <m:Column id="_IDGenColumn6">
+                                    <m:Text id="_IDGenText12" text="Subject" wrapping="true" />
+                                </m:Column>
+                                <m:Column id="_IDGenColumn7">
+                                    <m:Text id="_IDGenText13" text="Actions" />
+                                </m:Column>
+                            </m:columns>
+                        </m:Table>
+                    </m:VBox>
+                </ObjectPageSubSection>
+            </ObjectPageSection>
+        </sections>
+    </ObjectPageLayout>
+</mvc:View>

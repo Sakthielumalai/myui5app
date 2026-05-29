@@ -1,0 +1,36 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+  <Dialog id="mailDialog">
+    <content>
+      <VBox class="sapUiSmallMargin">
+      <Label text="Mail ID" labelFor="mailIdInput"  required="{= !${dialogModel>/isEdit}}"/>
+      <Input
+        id="mailIdInput"
+        value="{dialogModel>/mailid}"
+         change=".onMailIdChange"
+        showSuggestion="false"
+        required="true"
+        valueState="{dialogModel>/mailValueState}"
+        valueStateText="{dialogModel>/mailValueStateText}"/>
+        <Label text="Mail Subject(Enter all possible keywords):" labelFor="subjectInput" required="{= !${dialogModel>/isEdit}}"/>
+        <MultiInput id="subjectInput"
+                    value="{dialogModel>/newTokenValue}"
+                    tokens="{dialogModel>/sTokens}"
+                    submit=".onTokenSubmit"
+                    showValueHelp="false"
+                    tokenUpdate=".onTokenUpdate">
+          <tokens>
+            <Token text="{dialogModel>}" key="{dialogModel>}" />
+          </tokens>
+        </MultiInput>
+      </VBox>
+    </content>
+    <footer>
+      <Toolbar>
+        <content>
+          <Button text="Save" type="Emphasized" press=".onDialogSave" enabled="{dialogModel>/hasChanged}"/>
+          <Button text="Cancel" press=".onDialogCancel" />
+        </content>
+      </Toolbar>
+    </footer>
+  </Dialog>
+</core:FragmentDefinition>

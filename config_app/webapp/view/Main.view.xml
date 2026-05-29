@@ -1,0 +1,118 @@
+<mvc:View
+  controllerName="com.config.app.configapp.controller.Main"
+  xmlns:mvc="sap.ui.core.mvc"
+  xmlns="sap.m"
+  xmlns:f="sap.f"
+  xmlns:core="sap.ui.core"
+  xmlns:fb="sap.ui.comp.filterbar"
+  >
+  
+  <f:DynamicPage id="Main" toggleHeaderOnTitleClick="true" headerPinned="true"  >
+    <f:title>
+      <f:DynamicPageTitle id="_IDGenDynamicPageTitle" >
+        <f:heading><Title id="_IDGenTitle" text="Search App"/></f:heading>
+      </f:DynamicPageTitle>
+    </f:title>
+
+    <f:header>
+      <f:DynamicPageHeader id="_IDGenDynamicPageHeader">
+        <f:content>
+          <fb:FilterBar
+            id="filterBar"
+            persistencyKey="myPersKey"
+            useToolbar="false"
+            filterChange=".onFilterChanged"
+            afterVariantLoad=".onAfterVariantLoad"
+           >
+           <fb:filterGroupItems>
+  <fb:FilterGroupItem id="_IDGenFilterGroupItem1" name="Name" groupName="__Basic" visibleInFilterBar="true">
+    <fb:control>
+      <SearchField
+        id="inputName"
+        placeholder="Search by Name"
+        liveChange=".onFilterChanged"
+        width="100%"/>
+    </fb:control>
+  </fb:FilterGroupItem>
+
+  <fb:FilterGroupItem id="_IDGenFilterGroupItem2" name="machine_name" label="Machine Name" groupName="__Basic" visibleInFilterBar="true">
+    <fb:control>
+      <MultiComboBox
+        id="mcbMachine"
+        items="{machinemodel>/}"
+        selectionChange=".onFilterChanged">
+        <core:Item id="_IDGenItem" key="{machinemodel>key}" text="{machinemodel>name}"/>
+      </MultiComboBox>
+    </fb:control>
+  </fb:FilterGroupItem>
+
+  <fb:FilterGroupItem id="_IDGenFilterGroupItem3" name="Status" label="Status" groupName="__Basic" visibleInFilterBar="true">
+    <fb:control>
+      <MultiComboBox
+        id="mcbStatus"
+        items="{statusmodel>/}"
+        selectionChange=".onFilterChanged">
+        <core:Item id="_IDGenItem1" key="{statusmodel>key}" text="{statusmodel>name}"/>
+      </MultiComboBox>
+    </fb:control>
+  </fb:FilterGroupItem>
+</fb:filterGroupItems>
+          </fb:FilterBar>
+        </f:content>
+      </f:DynamicPageHeader>
+    </f:header>
+
+    <f:content>
+   
+
+     <Table
+        id="innerTable"
+        mode="MultiSelect"
+        items="{path: 'list>/'}"
+        class="sapFDynamicPageAlignContent"
+        alternateRowColors="true"
+        autoPopinMode="true"
+        growing="true"
+        growingThreshold="20"
+        growingScrollToLoad="true"
+        selectionChange=".onTableSelectionChange">
+        
+        <headerToolbar>
+          <OverflowToolbar id="_IDGenOverflowToolbar">
+            <Label id="tableCountLabel" text="Total No of Records: 0"/>
+            <ToolbarSpacer id="_IDGenToolbarSpacer"/>
+            <Button id="_IDGenButton" text="Create" icon="sap-icon://create" press=".onCreate" type="Emphasized"/>
+            <Button id="_IDGenButton1" text="Activate" icon="sap-icon://activate" press=".onActivate"
+              enabled="{view>/activateEnabled}" type="Emphasized"/>
+            <Button id="_IDGenButton2" text="Delete" icon="sap-icon://delete" press=".onDel"
+              enabled="{view>/deleteEnabled}" type="Emphasized"/>
+            
+          </OverflowToolbar>
+        </headerToolbar>
+
+        <columns >
+          <Column id="_IDGenColumn"><Text id="_IDGenText" text="User Name"/></Column>
+          <Column id="_IDGenColumn1"><Text id="_IDGenText1" text="Created By"/></Column>
+          <Column id="_IDGenColumn2"><Text id="_IDGenText2" text="Created On"/></Column>
+          <Column id="_IDGenColumn3"><Text id="_IDGenText3" text="Machine Name"/></Column>
+          <Column id="_IDGenColumn4"><Text id="_IDGenText4" text="Status"/></Column>
+        </columns>
+         
+        <items>
+          <ColumnListItem id="_IDGenColumnListItem" type="Navigation" press=".onListItemPress">
+            <cells>
+              <Text id="_IDGenText5" text="{list>Name}"/>
+              <Text id="_IDGenText6" text="{list>createdBy}"/>
+              <Text id="_IDGenText7" text="{path: 'list>createdAt', type:'sap.ui.model.type.Date', formatOptions:{pattern:'MM-dd-yyyy'}}"/>
+              <Text id="_IDGenText8" text="{list>machine_name}"/>
+              <ObjectStatus id="_IDGenObjectStatus" text="{list>Status}"
+                state="{= ${list>Status} === 'Active' ? 'Success' : 'Error'}"/>
+            </cells>
+          </ColumnListItem>
+        </items>
+      </Table>
+    
+    </f:content>
+
+  </f:DynamicPage>
+</mvc:View>

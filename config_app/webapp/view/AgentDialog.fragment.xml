@@ -1,0 +1,16 @@
+<core:FragmentDefinition xmlns="sap.m" xmlns:core="sap.ui.core">
+  <Dialog id="agentDialog" title="Agent Details" afterClose=".onAfterClose">
+    <VBox id="_IDGenVBox1" class="sapUiSmallMargin">
+      <Label id="_IDGenLabel" text="Machine Name" />
+      <Input id="inputMachine1" value="{newRecord>/machinename}" />
+      <Label id="_IDGenLabel1" text="User Name" />
+      <Input id="inputUser" value="{newRecord>/username}" />
+    </VBox>
+    <beginButton>
+      <Button id="_IDGenButton3" text="Save" type="Emphasized" press=".onSaveAgent"/>
+    </beginButton>
+    <endButton>
+      <Button id="_IDGenButton4" text="Cancel" press=".onCancelAgent"/>
+    </endButton>
+  </Dialog>
+</core:FragmentDefinition>

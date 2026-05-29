@@ -1,0 +1,25 @@
+<mvc:View
+    controllerName="com.config.app.configapp.controller.App"
+    displayBlock="true"
+    xmlns:f="sap.f"
+    xmlns:mvc="sap.ui.core.mvc"
+    xmlns="sap.m"
+>
+    <App id="AppView">
+        <f:FlexibleColumnLayout
+            id="fcl"
+            backgroundDesign="Solid"
+            layout="{ui>/layout}"
+            stateChange=".onStateChanged"
+        >
+            <f:beginColumnPages>
+                <mvc:XMLView
+                    id="beginView"
+                    viewName="com.config.app.configapp.view.Main"
+                />
+            </f:beginColumnPages>
+            <f:midColumnPages />
+            <f:endColumnPages/>
+        </f:FlexibleColumnLayout>
+    </App>
+</mvc:View>
